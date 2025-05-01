@@ -103,11 +103,16 @@
 
 @layer components {
   .section-heading {
-    @apply text-3xl font-bold mb-6 font-display;
+    @apply text-3xl font-bold mb-6 font-display relative;
+  }
+  
+  .section-heading::after {
+    content: '';
+    @apply block h-1 w-20 bg-primary/70 mt-2 rounded-full;
   }
   
   .section-container {
-    @apply max-w-5xl mx-auto px-6 py-16;
+    @apply max-w-5xl mx-auto px-6 py-20;
   }
   
   .highlight {
@@ -115,7 +120,7 @@
   }
   
   .skill-badge {
-    @apply px-3 py-1 bg-secondary text-secondary-foreground rounded-md text-sm font-medium;
+    @apply px-3 py-1 bg-secondary text-secondary-foreground rounded-md text-sm font-medium transition-all;
   }
   
   .nav-link {
@@ -136,5 +141,40 @@
   
   .contact-link {
     @apply flex items-center gap-2 hover:text-primary transition-colors;
+  }
+  
+  .bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  }
+}
+
+@layer utilities {
+  .animate-blob {
+    animation: blob-bounce 7s infinite ease;
+  }
+  
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+
+@keyframes blob-bounce {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(5%, 10%) scale(1.1);
+  }
+  50% {
+    transform: translate(10%, -5%) scale(0.9);
+  }
+  75% {
+    transform: translate(-5%, 5%) scale(1.05);
   }
 }
