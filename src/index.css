@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,19 +38,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -96,6 +92,49 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    scroll-behavior: smooth;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .section-heading {
+    @apply text-3xl font-bold mb-6 font-display;
+  }
+  
+  .section-container {
+    @apply max-w-5xl mx-auto px-6 py-16;
+  }
+  
+  .highlight {
+    @apply text-primary font-semibold;
+  }
+  
+  .skill-badge {
+    @apply px-3 py-1 bg-secondary text-secondary-foreground rounded-md text-sm font-medium;
+  }
+  
+  .nav-link {
+    @apply transition-colors hover:text-primary relative;
+  }
+  
+  .nav-link::after {
+    @apply content-[''] absolute w-0 h-0.5 bg-primary bottom-0 left-0 transition-all duration-300;
+  }
+  
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+  
+  .project-card {
+    @apply border rounded-lg p-6 transition-all hover:shadow-md hover:-translate-y-1 duration-300;
+  }
+  
+  .contact-link {
+    @apply flex items-center gap-2 hover:text-primary transition-colors;
   }
 }
