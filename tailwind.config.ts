@@ -62,7 +62,17 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// New aesthetic colors
+				'soft-blue': '#D3E4FD',
+				'soft-purple': '#E5DEFF',
+				'soft-pink': '#FFDEE2',
+				'soft-orange': '#FEC6A1',
+				'soft-green': '#F2FCE2',
+				'soft-yellow': '#FEF7CD',
+				'vivid-purple': '#8B5CF6',
+				'ocean-blue': '#0EA5E9',
+				'magenta-pink': '#D946EF',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -108,6 +118,30 @@ export default {
 					"66%": {
 						transform: "translate(-5%, 5%) scale(0.9)"
 					}
+				},
+				"float": {
+					"0%, 100%": {
+						transform: "translateY(0)"
+					},
+					"50%": {
+						transform: "translateY(-10px)"
+					}
+				},
+				"pulse-soft": {
+					"0%, 100%": {
+						opacity: "0.6"
+					},
+					"50%": {
+						opacity: "0.9"
+					}
+				},
+				"spin-slow": {
+					"0%": {
+						transform: "rotate(0deg)"
+					},
+					"100%": {
+						transform: "rotate(360deg)"
+					}
 				}
 			},
 			animation: {
@@ -116,6 +150,9 @@ export default {
 				"fade-in": "fade-in 0.5s ease-out",
 				"fade-out": "fade-out 0.5s ease-out",
 				"blob": "blob 7s infinite",
+				"float": "float 6s ease-in-out infinite",
+				"pulse-soft": "pulse-soft 4s ease-in-out infinite",
+				"spin-slow": "spin-slow 12s linear infinite",
 			},
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
@@ -123,6 +160,7 @@ export default {
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
 			},
 		}
 	},
