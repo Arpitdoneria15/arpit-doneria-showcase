@@ -3,14 +3,32 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { toast } from "@/hooks/use-toast";
+import { Mail, Phone, Linkedin, Github, Send } from "lucide-react";
 
 const Contact = () => {
+  const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: ""
   });
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setIsVisible(true);
+      }
+    }, { threshold: 0.1 });
+    
+    const section = document.getElementById('contact');
+    if (section) observer.observe(section);
+    
+    return () => {
+      if (section) observer.unobserve(section);
+    };
+  }, []);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -21,7 +39,10 @@ const Contact = () => {
     e.preventDefault();
     // In a real application, you would send this data to a backend service
     console.log("Form submitted:", formData);
-    alert("Thank you for your message! I'll get back to you soon.");
+    toast({
+      title: "Message Sent",
+      description: "Thank you for your message! I'll get back to you soon.",
+    });
     setFormData({
       name: "",
       email: "",
@@ -30,105 +51,170 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="section-container bg-secondary/30">
-      <h2 className="section-heading">Get In Touch</h2>
-      
-      <div className="flex flex-col md:flex-row gap-10">
-        <div className="flex-1 space-y-6">
-          <p className="text-lg">
-            I'm always open to discussing new projects, opportunities or partnerships.
-            Feel free to reach out to me using the contact form or through my social media.
-          </p>
-          
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-              </svg>
-              <a href="mailto:arpitpandat504@gmail.com" className="contact-link">arpitpandat504@gmail.com</a>
-            </div>
-            
-            <div className="flex items-center gap-3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-              </svg>
-              <a href="tel:+919654219626" className="contact-link">+91 9654219626</a>
-            </div>
-            
-            <div className="flex items-center gap-3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                <rect x="2" y="9" width="4" height="12"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-              </svg>
-              <a href="https://www.linkedin.com/in/arpit-doneria/" target="_blank" rel="noopener noreferrer" className="contact-link">LinkedIn</a>
-            </div>
-            
-            <div className="flex items-center gap-3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
-                <path d="M9 18c-4.51 2-5-2-7-2"></path>
-              </svg>
-              <a href="https://github.com/Arpitdoneria159" target="_blank" rel="noopener noreferrer" className="contact-link">GitHub</a>
-            </div>
-          </div>
+    <section id="contact" className="py-20 bg-[#0F172A] relative">
+      {/* Background elements */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-5 pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-background to-transparent"></div>
+      <div className="absolute -top-40 -right-40 w-80 h-80 bg-ocean-blue/5 rounded-full blur-3xl opacity-60 animate-blob"></div>
+      <div className="absolute top-1/2 -left-40 w-80 h-80 bg-soft-purple/10 rounded-full blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
+
+      <div className="section-container relative z-10 max-w-6xl mx-auto">
+        <div className={`transition-all duration-1000 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="section-heading text-white mb-2">Get In Touch</h2>
+          <p className="text-white/60 max-w-xl mb-12">I'm always open to discussing new projects, opportunities or partnerships. Feel free to reach out!</p>
         </div>
         
-        <div className="flex-1">
-          <Card>
-            <CardContent className="p-6">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block mb-2 font-medium">
-                    Name
-                  </label>
-                  <Input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Your Name"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="email" className="block mb-2 font-medium">
-                    Email
-                  </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Your Email"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block mb-2 font-medium">
-                    Message
-                  </label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Your Message"
-                    rows={5}
-                    required
-                  />
-                </div>
-                
-                <Button type="submit" className="w-full">
-                  Send Message
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
+          {/* Contact Information */}
+          <div className="lg:col-span-2 space-y-8">
+            <div className={`transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <Card className="overflow-hidden border-none shadow-lg bg-ocean-blue/10 backdrop-blur-sm border border-ocean-blue/20">
+                <CardContent className="p-8">
+                  <h3 className="text-xl font-semibold text-white mb-6">Contact Information</h3>
+                  
+                  <div className="space-y-6">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-full bg-ocean-blue/20 flex items-center justify-center text-ocean-blue shrink-0">
+                        <Mail size={18} />
+                      </div>
+                      <div>
+                        <p className="text-white/60 text-sm">Email</p>
+                        <a href="mailto:arpitpandat504@gmail.com" className="text-white hover:text-ocean-blue transition-colors">
+                          arpitpandat504@gmail.com
+                        </a>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-full bg-ocean-blue/20 flex items-center justify-center text-ocean-blue shrink-0">
+                        <Phone size={18} />
+                      </div>
+                      <div>
+                        <p className="text-white/60 text-sm">Phone</p>
+                        <a href="tel:+919654219626" className="text-white hover:text-ocean-blue transition-colors">
+                          +91 9654219626
+                        </a>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-full bg-ocean-blue/20 flex items-center justify-center text-ocean-blue shrink-0">
+                        <Linkedin size={18} />
+                      </div>
+                      <div>
+                        <p className="text-white/60 text-sm">LinkedIn</p>
+                        <a 
+                          href="https://www.linkedin.com/in/arpit-doneria/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-white hover:text-ocean-blue transition-colors"
+                        >
+                          Arpit Doneria
+                        </a>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-full bg-ocean-blue/20 flex items-center justify-center text-ocean-blue shrink-0">
+                        <Github size={18} />
+                      </div>
+                      <div>
+                        <p className="text-white/60 text-sm">GitHub</p>
+                        <a 
+                          href="https://github.com/Arpitdoneria159" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-white hover:text-ocean-blue transition-colors"
+                        >
+                          Arpitdoneria159
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <div className="bg-ocean-blue/10 backdrop-blur-sm p-6 rounded-lg border border-ocean-blue/20">
+                <h3 className="text-xl font-semibold text-white mb-4">Resume</h3>
+                <p className="text-white/60 mb-4">Download my resume to learn more about my experience, education, and skills.</p>
+                <Button asChild className="bg-ocean-blue hover:bg-ocean-blue/90">
+                  <a href="/resume.pdf" download="Arpit_Doneria_Resume.pdf" className="flex items-center gap-2">
+                    Download Resume
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="7 10 12 15 17 10"></polyline>
+                      <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                  </a>
                 </Button>
-              </form>
-            </CardContent>
-          </Card>
+              </div>
+            </div>
+          </div>
+          
+          {/* Contact Form */}
+          <div className={`lg:col-span-3 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <Card className="overflow-hidden border-none shadow-lg bg-white/5 backdrop-blur-sm border border-white/10">
+              <CardContent className="p-8">
+                <h3 className="text-xl font-semibold text-white mb-6">Send Me a Message</h3>
+                
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label htmlFor="name" className="block mb-2 font-medium text-white/80">
+                      Name
+                    </label>
+                    <Input
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your Name"
+                      required
+                      className="bg-white/10 border-white/20 text-white placeholder:text-white/40"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="email" className="block mb-2 font-medium text-white/80">
+                      Email
+                    </label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Your Email"
+                      required
+                      className="bg-white/10 border-white/20 text-white placeholder:text-white/40"
+                    />
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="message" className="block mb-2 font-medium text-white/80">
+                      Message
+                    </label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Your Message"
+                      rows={5}
+                      required
+                      className="bg-white/10 border-white/20 text-white placeholder:text-white/40"
+                    />
+                  </div>
+                  
+                  <Button type="submit" className="w-full bg-ocean-blue hover:bg-ocean-blue/90 group">
+                    <span>Send Message</span>
+                    <Send size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </section>
