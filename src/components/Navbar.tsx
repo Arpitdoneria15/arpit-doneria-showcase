@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -49,10 +50,10 @@ const Navbar = () => {
     }`}>
       <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
         <a href="#" className="text-xl font-display font-bold relative group">
-          <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent group-hover:from-primary/90 group-hover:to-magenta-pink transition-all duration-300">
+          <span className="bg-gradient-to-r from-ocean-blue to-magenta-pink bg-clip-text text-transparent group-hover:from-primary/90 group-hover:to-vivid-purple transition-all duration-300">
             ARPIT DONERIA
           </span>
-          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-magenta-pink group-hover:w-full transition-all duration-300"></span>
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-ocean-blue to-magenta-pink group-hover:w-full transition-all duration-300"></span>
         </a>
         
         <nav className="hidden md:flex space-x-6">
@@ -60,14 +61,27 @@ const Navbar = () => {
             <a 
               key={index} 
               href={link.href} 
-              className={`nav-link text-sm font-medium relative ${activeLink === link.href ? 'text-primary' : ''}`}
+              className={`nav-link text-sm font-medium relative ${activeLink === link.href ? 'text-ocean-blue' : ''}`}
             >
               {link.name}
               {activeLink === link.href && (
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-primary to-magenta-pink/70 animate-pulse-soft"></span>
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-ocean-blue to-magenta-pink animate-pulse-soft"></span>
               )}
             </a>
           ))}
+          
+          {/* Resume Download Button */}
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="rounded-full border border-ocean-blue/30 hover:bg-ocean-blue/10 transition-all duration-300 group"
+            asChild
+          >
+            <a href="/resume.pdf" download="Arpit_Doneria_Resume.pdf" className="flex items-center space-x-2">
+              <span className="text-ocean-blue group-hover:text-primary">Resume</span>
+              <Download size={16} className="text-ocean-blue group-hover:text-primary" />
+            </a>
+          </Button>
         </nav>
         
         <div className="md:hidden flex items-center">
@@ -117,16 +131,29 @@ const Navbar = () => {
               <a
                 key={index}
                 href={link.href}
-                className={`text-xl font-medium text-center relative group ${activeLink === link.href ? 'text-primary' : ''}`}
+                className={`text-xl font-medium text-center relative group ${activeLink === link.href ? 'text-ocean-blue' : ''}`}
                 onClick={() => setMobileMenuOpen(false)}
                 style={{ animationDelay: `${index * 50}ms` }}
               >
-                <span className="bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text group-hover:text-primary transition-all duration-300">
+                <span className="bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text group-hover:text-ocean-blue transition-all duration-300">
                   {link.name}
                 </span>
-                <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-magenta-pink group-hover:w-1/2 transition-all duration-300"></span>
+                <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-ocean-blue to-magenta-pink group-hover:w-1/2 transition-all duration-300"></span>
               </a>
             ))}
+            
+            {/* Mobile Resume Button */}
+            <Button 
+              variant="outline" 
+              size="sm" 
+              className="rounded-full border-2 border-ocean-blue/50 hover:bg-ocean-blue/10 transition-all duration-300 mt-4 group w-36 mx-auto"
+              asChild
+            >
+              <a href="/resume.pdf" download="Arpit_Doneria_Resume.pdf" className="flex items-center justify-center space-x-2">
+                <span className="text-ocean-blue group-hover:text-primary">Resume</span>
+                <Download size={16} className="text-ocean-blue group-hover:text-primary" />
+              </a>
+            </Button>
           </div>
         </div>
       </div>

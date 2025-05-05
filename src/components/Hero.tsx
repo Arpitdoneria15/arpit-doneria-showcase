@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { Download } from "lucide-react";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,7 +30,7 @@ const Hero = () => {
       
       {/* Interactive gradient blobs that follow mouse */}
       <div 
-        className="absolute w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] opacity-70"
+        className="absolute w-[600px] h-[600px] rounded-full bg-ocean-blue/5 blur-[120px] opacity-70"
         style={{
           left: `${mousePosition.x * 10}%`,
           top: `${mousePosition.y * 50}%`,
@@ -49,13 +50,13 @@ const Hero = () => {
       ></div>
       
       {/* Fixed animated blobs for background depth */}
-      <div className="absolute -top-40 -left-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl animate-blob"></div>
+      <div className="absolute -top-40 -left-40 w-80 h-80 bg-ocean-blue/10 rounded-full blur-3xl animate-blob"></div>
       <div className="absolute top-1/2 -right-40 w-80 h-80 bg-soft-pink/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
       <div className="absolute -bottom-40 left-1/3 w-80 h-80 bg-soft-blue/20 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
       
       <div className="max-w-5xl mx-auto px-6 py-24 md:py-32 flex flex-col gap-6 z-10">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-lg md:text-xl font-medium bg-gradient-to-r from-primary via-vivid-purple to-primary/80 bg-clip-text text-transparent animate-fade-in">
+          <h2 className="text-lg md:text-xl font-medium bg-gradient-to-r from-ocean-blue via-vivid-purple to-magenta-pink bg-clip-text text-transparent animate-fade-in">
             Hello, my name is
           </h2>
         </div>
@@ -63,7 +64,7 @@ const Hero = () => {
         <div className={`transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h1 className="text-4xl md:text-7xl font-bold font-display leading-tight bg-gradient-to-r from-foreground via-foreground/90 to-foreground/60 bg-clip-text text-transparent relative">
             Arpit Doneria
-            <span className="absolute -z-10 blur-sm opacity-30 text-primary top-1 left-1">Arpit Doneria</span>
+            <span className="absolute -z-10 blur-sm opacity-30 text-ocean-blue top-1 left-1">Arpit Doneria</span>
           </h1>
           <h3 className="text-3xl md:text-4xl font-medium mt-3 bg-gradient-to-r from-muted-foreground to-muted-foreground/70 bg-clip-text text-transparent animate-fade-in">
             Full Stack Developer
@@ -78,20 +79,26 @@ const Hero = () => {
         </div>
 
         <div className={`flex gap-4 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <Button size="lg" variant="default" className="rounded-full px-8 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all hover:-translate-y-1 duration-300 relative overflow-hidden group" asChild>
+          <Button size="lg" variant="default" className="rounded-full px-8 shadow-lg shadow-ocean-blue/20 hover:shadow-ocean-blue/30 transition-all hover:-translate-y-1 duration-300 relative overflow-hidden group bg-ocean-blue hover:bg-ocean-blue/90" asChild>
             <a href="#projects">
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary/0 via-white/20 to-primary/0 transform -translate-x-full group-hover:translate-x-full transition-all duration-700"></span>
               View Projects
             </a>
           </Button>
-          <Button size="lg" variant="outline" className="rounded-full px-8 border-2 hover:bg-secondary/80 hover:border-primary/50 transition-all duration-300" asChild>
+          <Button size="lg" variant="outline" className="rounded-full px-8 border-2 border-ocean-blue/50 hover:bg-ocean-blue/10 hover:border-ocean-blue/70 transition-all duration-300" asChild>
             <a href="#contact">Contact Me</a>
+          </Button>
+          <Button size="lg" variant="ghost" className="rounded-full px-8 border border-ocean-blue/30 hover:bg-ocean-blue/10 transition-all duration-300 group" asChild>
+            <a href="/resume.pdf" download="Arpit_Doneria_Resume.pdf" className="flex items-center gap-2">
+              <span className="text-ocean-blue">Resume</span>
+              <Download size={18} className="text-ocean-blue" />
+            </a>
           </Button>
         </div>
       </div>
       
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-        <a href="#about" className="flex flex-col items-center text-sm text-muted-foreground hover:text-primary transition-colors">
+        <a href="#about" className="flex flex-col items-center text-sm text-muted-foreground hover:text-ocean-blue transition-colors">
           <span>Scroll Down</span>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 5L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
