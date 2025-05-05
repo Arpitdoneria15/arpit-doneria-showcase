@@ -1,7 +1,6 @@
-
 import { Button } from "@/components/ui/button";
 import { useEffect, useState, useRef } from "react";
-import { Download, GameController } from "lucide-react";
+import { Download, Gamepad } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const Hero = () => {
@@ -157,7 +156,7 @@ const Hero = () => {
       <div className={`mt-12 mb-8 max-w-5xl mx-auto px-6 transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="bg-ocean-blue/10 backdrop-blur-sm p-4 rounded-lg border border-ocean-blue/20">
           <div className="flex items-center gap-2 mb-4">
-            <GameController className="text-ocean-blue" size={20} />
+            <Gamepad className="text-ocean-blue" size={20} />
             <h3 className="text-white font-medium">Take a Break? Play a Mini Game</h3>
           </div>
           
