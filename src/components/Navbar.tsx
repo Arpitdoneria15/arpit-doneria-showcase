@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState("#");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,6 +13,18 @@ const Navbar = () => {
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
       }
+      
+      // Update active section based on scroll
+      const sections = document.querySelectorAll("section[id]");
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = "#" + section.getAttribute("id");
+        
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+          setActiveLink(sectionId);
+        }
+      });
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -30,14 +43,15 @@ const Navbar = () => {
   ];
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-background/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      scrolled ? 'bg-background/80 backdrop-blur-xl shadow-sm border-b border-primary/5' : 'bg-transparent'
     }`}>
       <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="#" className="text-xl font-display font-bold">
-          <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+        <a href="#" className="text-xl font-display font-bold relative group">
+          <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent group-hover:from-primary/90 group-hover:to-magenta-pink transition-all duration-300">
             ARPIT DONERIA
           </span>
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-magenta-pink group-hover:w-full transition-all duration-300"></span>
         </a>
         
         <nav className="hidden md:flex space-x-6">
@@ -45,9 +59,12 @@ const Navbar = () => {
             <a 
               key={index} 
               href={link.href} 
-              className="nav-link text-sm font-medium"
+              className={`nav-link text-sm font-medium relative ${activeLink === link.href ? 'text-primary' : ''}`}
             >
               {link.name}
+              {activeLink === link.href && (
+                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-primary to-magenta-pink/70 animate-pulse-soft"></span>
+              )}
             </a>
           ))}
         </nav>
@@ -89,9 +106,9 @@ const Navbar = () => {
         </div>
       </div>
       
-      {/* Mobile Menu */}
-      <div className={`fixed inset-0 bg-background/95 backdrop-blur-md transform transition-transform duration-300 ease-in-out z-20 md:hidden ${
-        mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+      {/* Mobile Menu with enhanced animation */}
+      <div className={`fixed inset-0 bg-background/90 backdrop-blur-xl transform transition-all duration-500 ease-in-out z-20 md:hidden ${
+        mobileMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
       }`}>
         <div className="flex flex-col items-center justify-center h-full">
           <div className="flex flex-col space-y-8">
@@ -99,10 +116,14 @@ const Navbar = () => {
               <a
                 key={index}
                 href={link.href}
-                className="text-xl font-medium text-center hover:text-primary transition-colors"
+                className={`text-xl font-medium text-center relative group ${activeLink === link.href ? 'text-primary' : ''}`}
                 onClick={() => setMobileMenuOpen(false)}
+                style={{ animationDelay: `${index * 50}ms` }}
               >
-                {link.name}
+                <span className="bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text group-hover:text-primary transition-all duration-300">
+                  {link.name}
+                </span>
+                <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-magenta-pink group-hover:w-1/2 transition-all duration-300"></span>
               </a>
             ))}
           </div>

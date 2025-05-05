@@ -7,7 +7,10 @@ const Footer = () => {
   
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      setMousePosition({ 
+        x: e.clientX / window.innerWidth,
+        y: e.clientY / window.innerHeight
+      });
     };
     
     window.addEventListener('mousemove', handleMouseMove);
@@ -24,16 +27,27 @@ const Footer = () => {
   
   return (
     <footer className="py-16 relative overflow-hidden">
-      {/* Gradient background */}
+      {/* Enhanced gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/30 to-primary/10"></div>
       
-      {/* Animated shapes */}
+      {/* Interactive animated shapes that follow mouse */}
       <div 
         className="absolute w-64 h-64 rounded-full bg-primary/5 blur-3xl" 
         style={{
-          left: `${mousePosition.x * 0.05}px`,
-          top: `${mousePosition.y * 0.05}px`,
+          left: `${mousePosition.x * 100}%`,
+          top: `${mousePosition.y * 100}%`,
+          transform: 'translate(-50%, -50%)',
           transition: 'all 0.8s ease-out',
+        }}
+      ></div>
+      
+      <div 
+        className="absolute w-48 h-48 rounded-full bg-soft-purple/10 blur-3xl" 
+        style={{
+          right: `${(1 - mousePosition.x) * 80}%`,
+          bottom: `${(1 - mousePosition.y) * 80}%`,
+          transform: 'translate(30%, 30%)',
+          transition: 'all 1.2s ease-out',
         }}
       ></div>
       
@@ -41,7 +55,7 @@ const Footer = () => {
       
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         <div className="flex flex-col items-center">
-          <a href="#" className="text-2xl font-display font-bold mb-6 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent hover:scale-105 transition-all duration-300">
+          <a href="#" className="text-2xl font-display font-bold mb-6 animated-gradient-text hover:scale-105 transition-all duration-300">
             ARPIT DONERIA
           </a>
           
@@ -52,9 +66,10 @@ const Footer = () => {
                 href={link.url} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110 shadow-md hover:shadow-primary/20"
+                className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110 hover:rotate-6 shadow-md hover:shadow-primary/20 group"
                 aria-label={link.name}
               >
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/0 via-white/20 to-primary/0 opacity-0 group-hover:opacity-100 transform -translate-x-full group-hover:translate-x-full transition-all duration-700 rounded-full"></div>
                 {link.icon === "linkedin" && (
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                 )}

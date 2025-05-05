@@ -63,7 +63,7 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// New aesthetic colors
+				// Enhanced aesthetic colors
 				'soft-blue': '#D3E4FD',
 				'soft-purple': '#E5DEFF',
 				'soft-pink': '#FFDEE2',
@@ -73,6 +73,11 @@ export default {
 				'vivid-purple': '#8B5CF6',
 				'ocean-blue': '#0EA5E9',
 				'magenta-pink': '#D946EF',
+				'mint': '#A7F3D0',
+				'lavender': '#DDD6FE',
+				'coral': '#FECACA',
+				'amber': '#FDE68A',
+				'sky': '#BAE6FD',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -142,7 +147,15 @@ export default {
 					"100%": {
 						transform: "rotate(360deg)"
 					}
-				}
+				},
+				"shimmer": {
+					"0%": {
+					  backgroundPosition: "-200% 0"
+					},
+					"100%": {
+					  backgroundPosition: "200% 0"
+					}
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
@@ -153,6 +166,7 @@ export default {
 				"float": "float 6s ease-in-out infinite",
 				"pulse-soft": "pulse-soft 4s ease-in-out infinite",
 				"spin-slow": "spin-slow 12s linear infinite",
+				"shimmer": "shimmer 8s ease-in-out infinite",
 			},
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
@@ -161,6 +175,13 @@ export default {
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+				'shimmer': 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, transparent 100%)',
+			},
+			boxShadow: {
+				'glass': '0 4px 30px rgba(0, 0, 0, 0.1)',
+				'glow-sm': '0 0 15px -3px rgba(139, 92, 246, 0.3)',
+				'glow': '0 0 25px -5px rgba(139, 92, 246, 0.4)',
+				'glow-lg': '0 0 35px -5px rgba(139, 92, 246, 0.5)',
 			},
 		}
 	},
