@@ -1,8 +1,10 @@
 
 import { Gamepad } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface MiniGamesProps {
   isVisible: boolean;
@@ -11,6 +13,7 @@ interface MiniGamesProps {
 const TicTacToe = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
+  const isMobile = useIsMobile();
   
   const winner = calculateWinner(board);
   
@@ -29,8 +32,9 @@ const TicTacToe = () => {
   const renderSquare = (i: number) => {
     return (
       <button 
-        className="w-16 h-16 bg-ocean-blue/20 border border-ocean-blue/30 flex items-center justify-center text-xl font-bold text-white hover:bg-ocean-blue/30 transition-all"
+        className={`${isMobile ? 'w-14 h-14' : 'w-16 h-16'} bg-ocean-blue/20 border border-ocean-blue/30 flex items-center justify-center text-xl font-bold text-white hover:bg-ocean-blue/30 transition-all active:scale-95 touch-manipulation`}
         onClick={() => handleClick(i)}
+        type="button"
       >
         {board[i]}
       </button>
@@ -66,6 +70,7 @@ const TicTacToe = () => {
         variant="outline" 
         onClick={resetGame}
         className="mt-4 border-ocean-blue/50 text-white hover:bg-ocean-blue/20"
+        type="button"
       >
         Reset Game
       </Button>
@@ -102,7 +107,7 @@ const MemoryGame = () => {
         {Array(12).fill(null).map((_, i) => (
           <div 
             key={i} 
-            className="w-16 h-16 bg-ocean-blue/20 rounded-md border border-ocean-blue/30 flex items-center justify-center text-xl font-bold text-ocean-blue"
+            className="w-12 h-12 sm:w-16 sm:h-16 bg-ocean-blue/20 rounded-md border border-ocean-blue/30 flex items-center justify-center text-xl font-bold text-ocean-blue"
           >
             <span className="opacity-0">?</span>
           </div>
@@ -126,29 +131,33 @@ const SnakeGame = () => {
 };
 
 const MiniGames = ({ isVisible }: MiniGamesProps) => {
+  const isMobile = useIsMobile();
   const [activeGame, setActiveGame] = useState<string | null>(null);
   
   return (
-    <div className={`mt-12 mb-8 max-w-5xl mx-auto px-6 transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+    <div className={`mt-8 sm:mt-12 mb-8 max-w-5xl mx-auto px-4 sm:px-6 transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
       <div className="bg-ocean-blue/10 backdrop-blur-sm p-4 rounded-lg border border-ocean-blue/20">
         <div className="flex items-center gap-2 mb-4">
           <Gamepad className="text-ocean-blue" size={20} />
           <h3 className="text-white font-medium">Take a Break? Play a Mini Game</h3>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           <Dialog>
             <DialogTrigger asChild>
               <Button 
                 variant="ghost"
                 className="p-3 bg-ocean-blue/20 rounded-lg flex items-center justify-center gap-2 hover:bg-ocean-blue/30 transition-all duration-300 text-white"
+                type="button"
               >
                 Tic Tac Toe
               </Button>
             </DialogTrigger>
-            <DialogContent className="bg-[#0F172A]/95 border border-ocean-blue/30 p-6 max-w-md">
-              <h3 className="text-xl font-medium text-white mb-6 text-center">Tic Tac Toe</h3>
-              <TicTacToe />
+            <DialogContent className="bg-[#0F172A]/95 border border-ocean-blue/30 p-4 sm:p-6 max-w-sm sm:max-w-md">
+              <h3 className="text-xl font-medium text-white mb-4 sm:mb-6 text-center">Tic Tac Toe</h3>
+              <ScrollArea className="h-full max-h-[70vh]">
+                <TicTacToe />
+              </ScrollArea>
             </DialogContent>
           </Dialog>
           
@@ -157,13 +166,16 @@ const MiniGames = ({ isVisible }: MiniGamesProps) => {
               <Button 
                 variant="ghost"
                 className="p-3 bg-vivid-purple/20 rounded-lg flex items-center justify-center gap-2 hover:bg-vivid-purple/30 transition-all duration-300 text-white"
+                type="button"
               >
                 Memory Match
               </Button>
             </DialogTrigger>
-            <DialogContent className="bg-[#0F172A]/95 border border-vivid-purple/30 p-6 max-w-md">
-              <h3 className="text-xl font-medium text-white mb-6 text-center">Memory Match</h3>
-              <MemoryGame />
+            <DialogContent className="bg-[#0F172A]/95 border border-vivid-purple/30 p-4 sm:p-6 max-w-sm sm:max-w-md">
+              <h3 className="text-xl font-medium text-white mb-4 sm:mb-6 text-center">Memory Match</h3>
+              <ScrollArea className="h-full max-h-[70vh]">
+                <MemoryGame />
+              </ScrollArea>
             </DialogContent>
           </Dialog>
           
@@ -172,13 +184,16 @@ const MiniGames = ({ isVisible }: MiniGamesProps) => {
               <Button 
                 variant="ghost"
                 className="p-3 bg-magenta-pink/20 rounded-lg flex items-center justify-center gap-2 hover:bg-magenta-pink/30 transition-all duration-300 text-white"
+                type="button"
               >
                 Snake Game
               </Button>
             </DialogTrigger>
-            <DialogContent className="bg-[#0F172A]/95 border border-magenta-pink/30 p-6 max-w-md">
-              <h3 className="text-xl font-medium text-white mb-6 text-center">Snake Game</h3>
-              <SnakeGame />
+            <DialogContent className="bg-[#0F172A]/95 border border-magenta-pink/30 p-4 sm:p-6 max-w-sm sm:max-w-md">
+              <h3 className="text-xl font-medium text-white mb-4 sm:mb-6 text-center">Snake Game</h3>
+              <ScrollArea className="h-full max-h-[70vh]">
+                <SnakeGame />
+              </ScrollArea>
             </DialogContent>
           </Dialog>
         </div>

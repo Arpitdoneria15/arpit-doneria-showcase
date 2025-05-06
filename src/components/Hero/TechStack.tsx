@@ -4,6 +4,7 @@ import {
   Code, Database, Server, Globe, 
   Cpu, Layers, GitBranch, LineChart 
 } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface TechStackProps {
   isVisible: boolean;
@@ -11,6 +12,7 @@ interface TechStackProps {
 
 const TechStack = ({ isVisible }: TechStackProps) => {
   const techStackRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   
   const techStack = [
     { name: "React", icon: <Globe className="text-sky-400" /> },
@@ -28,6 +30,9 @@ const TechStack = ({ isVisible }: TechStackProps) => {
   ];
 
   useEffect(() => {
+    // Don't run the animation if no ref or not visible
+    if (!techStackRef.current || !isVisible) return;
+    
     // Tech stack animation
     const interval = setInterval(() => {
       if (techStackRef.current) {
@@ -39,12 +44,12 @@ const TechStack = ({ isVisible }: TechStackProps) => {
           techStackRef.current.scrollLeft = 0;
         }
       }
-    }, 20);
+    }, isMobile ? 30 : 20); // Slower on mobile
     
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [isVisible, isMobile]);
 
   return (
     <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
@@ -52,7 +57,7 @@ const TechStack = ({ isVisible }: TechStackProps) => {
         <h3 className="text-sm font-medium text-white mb-3">Tech Stack</h3>
         <div 
           ref={techStackRef}
-          className="flex gap-3 overflow-hidden whitespace-nowrap pb-2"
+          className="flex gap-3 overflow-hidden whitespace-nowrap pb-2 scrollbar-hide"
           style={{ maskImage: 'linear-gradient(to right, transparent, white 10%, white 90%, transparent)' }}
         >
           {[...techStack, ...techStack].map((tech, index) => (
