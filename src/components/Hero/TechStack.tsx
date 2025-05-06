@@ -2,7 +2,7 @@
 import { useRef, useEffect } from "react";
 import { 
   Code, Database, Server, Globe, 
-  Cpu, Layers, Git, LineChart 
+  Cpu, Layers, GitBranch, LineChart 
 } from "lucide-react";
 
 interface TechStackProps {
@@ -18,7 +18,7 @@ const TechStack = ({ isVisible }: TechStackProps) => {
     { name: "TypeScript", icon: <Code className="text-blue-500" /> },
     { name: "JavaScript", icon: <Code className="text-yellow-400" /> },
     { name: "MongoDB", icon: <Database className="text-green-600" /> },
-    { name: "Git", icon: <Git className="text-orange-500" /> },
+    { name: "Git", icon: <GitBranch className="text-orange-500" /> },
     { name: "Python", icon: <Code className="text-blue-600" /> },
     { name: "C++", icon: <Cpu className="text-blue-400" /> },
     { name: "SQL", icon: <Database className="text-cyan-500" /> },
