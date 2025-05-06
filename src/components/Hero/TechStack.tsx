@@ -1,5 +1,9 @@
 
 import { useRef, useEffect } from "react";
+import { 
+  Code, Database, Server, Globe, 
+  Cpu, Layers, Git, LineChart 
+} from "lucide-react";
 
 interface TechStackProps {
   isVisible: boolean;
@@ -9,9 +13,18 @@ const TechStack = ({ isVisible }: TechStackProps) => {
   const techStackRef = useRef<HTMLDivElement>(null);
   
   const techStack = [
-    "React", "Node.js", "TypeScript", "JavaScript", 
-    "HTML", "CSS", "MongoDB", "Git", "Python", "C++", 
-    "SQL", "Tailwind", "Firebase", "Redux"
+    { name: "React", icon: <Globe className="text-sky-400" /> },
+    { name: "Node.js", icon: <Server className="text-green-500" /> },
+    { name: "TypeScript", icon: <Code className="text-blue-500" /> },
+    { name: "JavaScript", icon: <Code className="text-yellow-400" /> },
+    { name: "MongoDB", icon: <Database className="text-green-600" /> },
+    { name: "Git", icon: <Git className="text-orange-500" /> },
+    { name: "Python", icon: <Code className="text-blue-600" /> },
+    { name: "C++", icon: <Cpu className="text-blue-400" /> },
+    { name: "SQL", icon: <Database className="text-cyan-500" /> },
+    { name: "Tailwind", icon: <Layers className="text-cyan-400" /> },
+    { name: "Firebase", icon: <LineChart className="text-orange-400" /> },
+    { name: "Redux", icon: <Layers className="text-purple-500" /> }
   ];
 
   useEffect(() => {
@@ -43,12 +56,13 @@ const TechStack = ({ isVisible }: TechStackProps) => {
           style={{ maskImage: 'linear-gradient(to right, transparent, white 10%, white 90%, transparent)' }}
         >
           {[...techStack, ...techStack].map((tech, index) => (
-            <span 
-              key={`${tech}-${index}`} 
-              className="px-3 py-1 bg-ocean-blue/20 text-ocean-blue/90 rounded-md text-sm font-medium border border-ocean-blue/30"
+            <div 
+              key={`${tech.name}-${index}`} 
+              className="px-3 py-2 bg-ocean-blue/20 text-ocean-blue/90 rounded-md text-sm font-medium border border-ocean-blue/30 flex items-center gap-2 hover:bg-ocean-blue/30 transition-all"
             >
-              {tech}
-            </span>
+              <div className="animate-spin-slow">{tech.icon}</div>
+              <span>{tech.name}</span>
+            </div>
           ))}
         </div>
       </div>

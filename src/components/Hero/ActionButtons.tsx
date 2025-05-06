@@ -19,12 +19,12 @@ const ActionButtons = ({ isVisible }: ActionButtonsProps) => {
           View Projects
         </a>
       </Button>
-      <Button size="lg" variant="outline" className="rounded-full px-8 border-2 border-ocean-blue/50 text-white hover:bg-ocean-blue/10 hover:border-ocean-blue/70 transition-all duration-300" asChild>
+      <Button size="lg" variant="outline" className="rounded-full px-8 border-2 border-ocean-blue/50 text-white hover:bg-ocean-blue/10 hover:border-ocean-blue/70 transition-all hover:-translate-y-1 duration-300" asChild>
         <a href="#contact">Contact Me</a>
       </Button>
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogTrigger asChild>
-          <Button size="lg" variant="ghost" className="rounded-full px-8 border border-ocean-blue/30 hover:bg-ocean-blue/10 transition-all duration-300 group">
+          <Button size="lg" variant="ghost" className="rounded-full px-8 border border-ocean-blue/30 hover:bg-ocean-blue/10 transition-all hover:-translate-y-1 duration-300 group">
             <span className="text-ocean-blue">Resume</span>
             <Download size={18} className="text-ocean-blue ml-2" />
           </Button>
@@ -34,7 +34,7 @@ const ActionButtons = ({ isVisible }: ActionButtonsProps) => {
             <h3 className="text-2xl font-medium text-white mb-6">Arpit Doneria's Resume</h3>
             <div className="w-full max-h-[70vh] overflow-auto mb-6">
               <img 
-                src="/lovable-uploads/219207b5-bf05-4ef1-b03f-bb120f59edaf.png" 
+                src="/lovable-uploads/19350774-46e5-494e-ab0c-eecf218992c2.png" 
                 alt="Arpit Doneria Resume" 
                 className="w-full h-auto object-contain shadow-xl rounded-md"
               />
