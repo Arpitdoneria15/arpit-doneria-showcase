@@ -11,7 +11,7 @@ const ProfileSection = ({ isVisible }: ProfileSectionProps) => {
       {/* Profile picture */}
       <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <Avatar className="w-40 h-40 border-4 border-ocean-blue/50 shadow-lg shadow-ocean-blue/20">
-          <AvatarImage src="/lovable-uploads/219207b5-bf05-4ef1-b03f-bb120f59edaf.png" alt="Arpit Doneria" />
+          <AvatarImage src="/lovable-uploads/7e6d6647-2429-49b7-b75e-00bea9031a8b.png" alt="Arpit Doneria" />
           <AvatarFallback className="bg-ocean-blue/20 text-2xl">AD</AvatarFallback>
         </Avatar>
       </div>
