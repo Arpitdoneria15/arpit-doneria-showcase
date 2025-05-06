@@ -19,7 +19,7 @@ const ActionButtons = ({ isVisible }: ActionButtonsProps) => {
           View Projects
         </a>
       </Button>
-      <Button size="lg" variant="outline" className="rounded-full px-8 border-2 border-ocean-blue/50 text-white hover:bg-ocean-blue/10 hover:border-ocean-blue/70 transition-all hover:-translate-y-1 duration-300" asChild>
+      <Button size="lg" variant="outline" className="rounded-full px-8 border-2 border-ocean-blue/50 text-white bg-ocean-blue/10 hover:bg-ocean-blue/20 hover:border-ocean-blue/70 transition-all hover:-translate-y-1 duration-300" asChild>
         <a href="#contact">Contact Me</a>
       </Button>
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
